@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { aluno } from './aluno.entity';
+import { Aluno } from './aluno.entity';
 import { alunoService } from './aluno.service';
 import { alunoController } from './aluno.controller';
 
+// encapsulating all aluno elements
 @Module({
-    imports: [TypeOrmModule.forFeature([aluno])],
+    imports: [TypeOrmModule.forFeature([Aluno])],
     providers: [alunoService],
     controllers: [alunoController],
 

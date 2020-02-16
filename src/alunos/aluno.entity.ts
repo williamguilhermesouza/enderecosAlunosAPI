@@ -1,7 +1,9 @@
 import { Entity, PrimaryColumn, Column } from 'typeorm';
 
+
+// typeorm entity defining the table in DataBase
 @Entity()
-export class aluno {
+export class Aluno {
 
     @PrimaryColumn()
     id: number;

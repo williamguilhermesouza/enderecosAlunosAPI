@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { aluno } from './alunos/aluno.entity';
+import { Aluno } from './alunos/aluno.entity';
 import { alunoModule } from './alunos/aluno.module';
 
 @Module({
@@ -15,7 +15,7 @@ import { alunoModule } from './alunos/aluno.module';
       username: 'postgres',
       password: '123',
       database: 'lemobs',
-      entities: [aluno],
+      entities: [Aluno],
       synchronize: true,
     }),
     alunoModule,
