@@ -44,8 +44,8 @@ export class alunoController {
 
     // returns all enderecos (addresses) of the aluno with given id
     @Get(':id/endereco')
-    findEndereco(@Param('id') id) {
-        
+    findEndereco(@Param('id') id): string {
+        return `id: ${id}`;  
     }
 
     // returns all alunos with nota depending on the criterio,
