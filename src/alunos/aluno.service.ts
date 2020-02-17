@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Aluno } from './aluno.entity';
-import { Endereco } from '../enderecos/endereco.entity';
 
 // creating an injectable service with the functions
 @Injectable()
@@ -36,9 +35,16 @@ export class alunoService {
     }
 
     // function that returns an array of all alunos
-    findAll(): Promise<Aluno[]> {
-        return this.alunoRepository.find();
+    async findAll(): Promise<Aluno[]> {
+        return await this.alunoRepository.find();
     }
 
-    
+    // function that returns an aluno with nota matching criterio (lt for < 
+    // and bt for >)
+    async getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
+        return this.alunoRepository
+            .createQueryBuilder("aluno")
+            .where(`aluno.nota ${criterio} ${nota}`)
+            .getMany();
+    }
 }

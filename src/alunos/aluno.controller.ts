@@ -44,9 +44,9 @@ export class alunoController {
 
     // returns all alunos with nota depending on the criterio,
     // the criterio may be bigger than (>) or less than (<)
-    @Get('aluno/:nota/criterio/:criterio')
+    @Get(':nota/criterio/:criterio')
     getAlunoCriterio(@Param('nota') nota, @Param('criterio') criterio) {
-
+        return this.alunoService.getAlunoCriterio(nota, criterio);
     }
 
     // return the data of all alunos that have nota bigger than the 

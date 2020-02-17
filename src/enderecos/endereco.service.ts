@@ -33,7 +33,7 @@ export class enderecoService {
             .addSelect("endereco.complemento")
             .addSelect("endereco.bairro")
             .where(`aluno_id = ${id}`)
-            .getManyAndCount()
+            .getManyAndCount();
 
         // map function for formatting
         const formatedEnderecos = enderecos.map((endereco): {} => {
@@ -41,7 +41,7 @@ export class enderecoService {
                 "endereco": `${endereco.rua}, ${endereco.numero} - ${endereco.complemento}`,
                 "bairro": endereco.bairro,
             }
-        })
+        });
 
         // more formatting
         const queryResults = {
