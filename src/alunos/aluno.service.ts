@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Aluno } from './aluno.entity';
+import { Endereco } from '../enderecos/endereco.entity';
 
 // creating an injectable service with the functions
 @Injectable()
@@ -38,4 +39,6 @@ export class alunoService {
     findAll(): Promise<Aluno[]> {
         return this.alunoRepository.find();
     }
+
+    
 }

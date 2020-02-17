@@ -42,12 +42,6 @@ export class alunoController {
         return this.alunoService.findAll();
     }
 
-    // returns all enderecos (addresses) of the aluno with given id
-    @Get(':id/endereco')
-    findEndereco(@Param('id') id): string {
-        return `id: ${id}`;  
-    }
-
     // returns all alunos with nota depending on the criterio,
     // the criterio may be bigger than (>) or less than (<)
     @Get('aluno/:nota/criterio/:criterio')
