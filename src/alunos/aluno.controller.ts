@@ -23,10 +23,17 @@ export class alunoController {
         return this.alunoService.update(id, updateAlunoDto);
     }
 
+    @Get(':route')
+    routeParser(@Param('route') route) {
+        if (route == 'media')
+            return this.getApproved();
+        else
+            return this.findOneAluno(route);
+    }
     
     // route used to return only the aluno with matching id
-    @Get(':id')
-    findOneAluno(@Param('id') id): Promise<Aluno> {
+    
+    findOneAluno(id): Promise<Aluno> {
         return this.alunoService.findOne(id);
     }
 
@@ -52,7 +59,7 @@ export class alunoController {
 
     // return the data of all alunos that have nota bigger than the 
     // average of all aluno notas
-    @Get('media')
+    
     getApproved(): Promise<Aluno[]> {
         return this.alunoService.approved();
     }
