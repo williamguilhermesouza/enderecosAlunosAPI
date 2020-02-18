@@ -42,9 +42,26 @@ export class alunoService {
     // function that returns an aluno with nota matching criterio (lt for < 
     // and bt for >)
     async getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
-        return this.alunoRepository
+        return await this.alunoRepository
             .createQueryBuilder("aluno")
             .where(`aluno.nota ${criterio} ${nota}`)
             .getMany();
+    }
+
+    // returns an array of aluno that has nota bigger than the average
+    // of all aluno nota
+    async approved(): Promise<Aluno[]> {
+        let avg =  await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .select("AVG(aluno.nota)")
+            .getRawOne();
+            
+        avg = Math.round(parseFloat(avg.avg));
+
+        return await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .where(`aluno.nota > ${avg}`)
+            .getMany();
+
     }
 }

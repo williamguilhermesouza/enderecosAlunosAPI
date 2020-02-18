@@ -23,7 +23,8 @@ export class alunoController {
         return this.alunoService.update(id, updateAlunoDto);
     }
 
-    // route to return only the aluno with matching id
+    
+    // route used to return only the aluno with matching id
     @Get(':id')
     findOneAluno(@Param('id') id): Promise<Aluno> {
         return this.alunoService.findOne(id);
@@ -38,22 +39,22 @@ export class alunoController {
 
     // route to return a json of all alunos
     @Get()
-    findAllAlunos() {
+    findAllAlunos(): Promise<Aluno[]> {
         return this.alunoService.findAll();
     }
 
     // returns all alunos with nota depending on the criterio,
     // the criterio may be bigger than (>) or less than (<)
     @Get(':nota/criterio/:criterio')
-    getAlunoCriterio(@Param('nota') nota, @Param('criterio') criterio) {
+    getAlunoCriterio(@Param('nota') nota, @Param('criterio') criterio): Promise<Aluno[]> {
         return this.alunoService.getAlunoCriterio(nota, criterio);
     }
 
     // return the data of all alunos that have nota bigger than the 
     // average of all aluno notas
-    @Get('aluno/media')
-    getApproved() {
-
+    @Get('media')
+    getApproved(): Promise<Aluno[]> {
+        return this.alunoService.approved();
     }
 
 
