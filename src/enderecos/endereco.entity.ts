@@ -11,10 +11,10 @@ export class Endereco {
     rua: string;
 
     @Column()
-    numero: string;
+    numero?: string;
 
     @Column()
-    complemento: string;
+    complemento?: string;
 
     @Column()
     bairro: string;

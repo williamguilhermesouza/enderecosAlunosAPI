@@ -1,17 +1,17 @@
 CREATE TABLE IF NOT EXISTS aluno (
 	id INTEGER NOT NULL PRIMARY KEY,
-	nome TEXT,
-	data_nascimento TIMESTAMP,
-	cpf TEXT,
-	nota INTEGER
+	nome TEXT NOT NULL,
+	data_nascimento TIMESTAMP NOT NULL,
+	cpf TEXT NOT NULL,
+	nota INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS endereco (
 	id INTEGER NOT NULL PRIMARY KEY,
-	rua TEXT,
+	rua TEXT NOT NULL,
 	numero VARCHAR(5),
 	complemento TEXT,
-	bairro TEXT,
+	bairro TEXT NOT NULL,
 	aluno_id INTEGER NOT NULL,
 	CONSTRAINT fk_endal FOREIGN KEY (aluno_id) REFERENCES aluno (id)
 );

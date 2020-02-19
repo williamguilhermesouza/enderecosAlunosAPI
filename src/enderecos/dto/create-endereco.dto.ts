@@ -4,8 +4,8 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateEnderecoDto {
     readonly id: number;
     readonly rua: string;
-    readonly numero: string;
-    readonly complemento: string;
+    readonly numero?: string;
+    readonly complemento?: string;
     readonly bairro: string;
     readonly aluno_id: number;
 }
