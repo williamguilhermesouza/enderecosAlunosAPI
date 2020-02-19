@@ -1,4 +1,5 @@
 // creating the dto to receive the endereco from body requests
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateEnderecoDto {
     readonly id: number;
