@@ -5,12 +5,14 @@ sudo su - postgres
 
 psql
 
+CREATE DATABASE lemobs;
+
 # creating aluno table
 CREATE TABLE IF NOT EXISTS aluno (\
 	id INTEGER NOT NULL PRIMARY KEY,\
 	nome TEXT NOT NULL,\
 	data_nascimento TIMESTAMP NOT NULL,\
-	cpf TEXT NOT NULL,\
+	cpf TEXT NOT NULL UNIQUE,\
 	nota INTEGER NOT NULL\
 );
 
