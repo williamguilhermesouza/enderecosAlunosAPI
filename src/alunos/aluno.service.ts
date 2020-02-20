@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Aluno } from './aluno.entity';
+import cpfValidator from './utils/cpfValidator';
+import { BadRequestException } from '@nestjs/common';
 
 // creating an injectable service with the functions
 @Injectable()
@@ -16,12 +18,27 @@ export class alunoService {
 
     // function to create a new aluno
     async create(aluno: Aluno): Promise<Aluno> {
-        return await this.alunoRepository.save(aluno);
+        let cpf = aluno.cpf;
+        cpf = cpf.split('.').join('');
+        if (cpfValidator(cpf)) {
+            return await this.alunoRepository.save(aluno); 
+        }
+        else {
+            throw new BadRequestException(`Invalid CPF: ${aluno.cpf}`);
+        }
+        
     }
 
     // if aluno exist, update it, if not create it
     async update(id: number, aluno: Aluno): Promise<Aluno> {
-        return await this.alunoRepository.save(aluno);
+        let cpf = aluno.cpf;
+        cpf = cpf.split('.').join('');
+        if (cpfValidator(cpf)) {
+            return await this.alunoRepository.save(aluno);
+        }
+        else {
+            throw new BadRequestException(`Invalid CPF: ${aluno.cpf}`);
+        }
     }
 
     // returns the aluno with the given id
