@@ -21,6 +21,7 @@ export class alunoService {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
         if (cpfValidator(cpf)) {
+            aluno.cpf = cpf;
             return await this.alunoRepository.save(aluno); 
         }
         else {
@@ -34,6 +35,7 @@ export class alunoService {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
         if (cpfValidator(cpf)) {
+            aluno.cpf = cpf;
             return await this.alunoRepository.save(aluno);
         }
         else {
