@@ -20,6 +20,7 @@ export class alunoService {
     async create(aluno: Aluno): Promise<Aluno> {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
+        cpf = cpf.split('-').join('');
         if (cpfValidator(cpf)) {
             aluno.cpf = cpf;
             return await this.alunoRepository.save(aluno); 
@@ -34,6 +35,7 @@ export class alunoService {
     async update(id: number, aluno: Aluno): Promise<Aluno> {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
+        cpf = cpf.split('-').join('');
         if (cpfValidator(cpf)) {
             aluno.cpf = cpf;
             return await this.alunoRepository.save(aluno);
