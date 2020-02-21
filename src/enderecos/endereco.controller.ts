@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { enderecoService } from './endereco.service';
 import { CreateEnderecoDto } from './dto/create-endereco.dto';
 import { Endereco } from './endereco.entity';
@@ -19,8 +19,8 @@ export class enderecoController {
 
     // get method that returns a json with all enderecos
     @Get('enderecos')
-    findAllEndereco() {
-        return this.enderecoService.findAll();
+    findAllEndereco(@Query('bairro') bairro?: string) {
+        return this.enderecoService.findAll(bairro);
     }
 
     // returns a json with the quantity of enderecos of a given aluno

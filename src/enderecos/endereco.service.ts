@@ -20,8 +20,15 @@ export class enderecoService {
     }
 
     // returns all enderecos in the database
-    async findAll(): Promise<Endereco[]> {
-        return await this.enderecoRepository.find();
+    async findAll(bairro?): Promise<Endereco[]> {
+        let enderecos =  await this.enderecoRepository.find();
+        
+        if (bairro) {
+            enderecos = enderecos.filter((endereco) => {
+                return endereco.bairro == bairro;
+            });    
+        }
+        return enderecos;
     }
 
     // makes a query for all the enderecos from the aluno with the given id
