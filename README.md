@@ -1,75 +1,66 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## Lemobs Test API 
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This application was build during a test applied by lemobs, that had as goal to build a REST API
+with NestJS and PostgreSQL DB. Also, the application docs where made using the swagger library, and 
+can be acessed using the 'api' route. 
 
-## Description
+The application is split between two main routes, as described below:
+***
+### **Alunos**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The alunos routes are basic CRUD operations in the database, where the routes are used to interact with the database, the routes are:
 
-## Installation
+> **HOST:3000/aluno[GET]** : returns all alunos registered in the database
 
-```bash
-$ npm install
-```
+> **HOST:3000/aluno/media[GET]** : returns all alunos that have media greater than the average of all alunos notas.
 
-## Running the app
+> **HOST:3000/aluno/{nota}/criterio/{criterio}[GET]** : returns all alunos that have the register nota greater than the nota given if criterio is > (greater than) or alunos that have nota less than if criterio is <
 
-```bash
-# development
-$ npm run start
+> **HOST:3000/aluno/{id}[GET]** : returns the aluno that has the matching id 
 
-# watch mode
-$ npm run start:dev
+> **HOST:3000/aluno/{id}[PUT]** : this route requires a json body, and updates the aluno registry with the given body
 
-# production mode
-$ npm run start:prod
-```
+> **HOST:3000/aluno/{id}[DELETE]** : deletes the aluno with given id
 
-## Test
+> **HOST:3000/aluno[POST]** : creates the aluno using a json body
+***
+### **Enderecos**
 
-```bash
-# unit tests
-$ npm run test
+The enderecos route uses only three routes as described:
 
-# e2e tests
-$ npm run test:e2e
+> **HOST:3000/enderecos**[GET] : this route returns all enderecos at the database. It may be used a query param called bairro, that return only the bairro matching with the address register.
 
-# test coverage
-$ npm run test:cov
-```
+> **HOST:3000/enderecos**[POST] : this route uses a json body to create an endereco registry
 
-## Support
+> **HOST:3000/aluno/{id}/endereco**[GET] : this route returns all enderecos of the aluno with the matching id.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+***
 
-## Stay in touch
+### Tables
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+For the application were used two tables in postgreSQL, which the scripts to create them can be found in the dbscripts folder, the tables have the structure described below:
 
-## License
+#### Aluno
+|Field | Value |
+-------|--------|
+id     | integer pk not null |
+nome| string not null|
+data_nascimento| timestamp not null|
+cpf| string, not null|
+nota| integer not null|
 
-  Nest is [MIT licensed](LICENSE).
+#### Endereco
+|Field | Value |
+-------|--------|
+id| pk integer not null|
+rua| string not null|
+numero| varchar(5)|
+complemento| string |
+bairro| string not null|
+aluno_id| fk integer not null|
+
+***
+
+Also, the application has a dockerfile and docker compose yml config file, and it can be built and run inside containers.
+
+## AUTHOR: WILLIAM SOUZA
