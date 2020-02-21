@@ -12,6 +12,8 @@ async function bootstrap() {
     .setTitle('lemobs-api')
     .setDescription('API that deals with alunos (students) and enderecos(addresses)')
     .setVersion('1.0')
+    .addTag('aluno')
+    .addTag('enderecos')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

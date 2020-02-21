@@ -2,8 +2,10 @@ import { Controller, Body, Get, Post, Put, Delete, Param } from '@nestjs/common'
 import { alunoService } from './aluno.service';
 import { CreateAlunoDto } from './dto/create-aluno.dto';
 import { Aluno } from './aluno.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 // using controller decorator to control the routes
+@ApiTags('aluno')
 @Controller('aluno')
 export class alunoController {
     // using constructor to use the service with the functions

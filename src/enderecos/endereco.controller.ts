@@ -2,8 +2,11 @@ import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { enderecoService } from './endereco.service';
 import { CreateEnderecoDto } from './dto/create-endereco.dto';
 import { Endereco } from './endereco.entity';
+import { ApiTags } from '@nestjs/swagger';
+
 
 // enderecos decorator for routing in enderecos 
+@ApiTags('enderecos')
 @Controller()
 export class enderecoController {
     // using constructor to use the service with the functions
