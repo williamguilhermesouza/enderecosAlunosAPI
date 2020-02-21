@@ -16,6 +16,11 @@ export class alunoService {
         private readonly alunoRepository: Repository<Aluno>,
     ) {}
 
+    cpfOutParser(cpf) {
+        cpf = [cpf.slice(0,3), '.', cpf.slice(3,6), '.', cpf.slice(6,9), '-',cpf.slice(9)].join('');
+        return cpf;
+    }
+
     // function to create a new aluno
     async create(aluno: Aluno): Promise<Aluno> {
         let cpf = aluno.cpf;
@@ -47,7 +52,9 @@ export class alunoService {
 
     // returns the aluno with the given id
     async findOne(id: number): Promise<Aluno> {
-        return await this.alunoRepository.findOne(id);
+        let aluno = await this.alunoRepository.findOne(id);
+        aluno.cpf = this.cpfOutParser(aluno.cpf);
+        return aluno;
     }
 
     // delete the aluno with the given id and returns it
@@ -57,16 +64,28 @@ export class alunoService {
 
     // function that returns an array of all alunos
     async findAll(): Promise<Aluno[]> {
-        return await this.alunoRepository.find();
+        let alunos = await this.alunoRepository.find();
+
+        alunos.map((aluno) => {
+            aluno.cpf = this.cpfOutParser(aluno.cpf);
+        });
+
+        return alunos;
     }
 
     // function that returns an aluno with nota matching criterio (lt for < 
     // and bt for >)
     async getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
-        return await this.alunoRepository
+        let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
             .where(`aluno.nota ${criterio} ${nota}`)
             .getMany();
+
+        alunos.map((aluno) => {
+            aluno.cpf = this.cpfOutParser(aluno.cpf);
+        });
+
+        return alunos;
     }
 
     // returns an array of aluno that has nota bigger than the average
@@ -79,10 +98,16 @@ export class alunoService {
             
         avg = Math.round(parseFloat(avg.avg));
 
-        return await this.alunoRepository
+        let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
             .where(`aluno.nota > ${avg}`)
             .getMany();
+
+        alunos.map((aluno) => {
+            aluno.cpf = this.cpfOutParser(aluno.cpf);
+        });
+
+        return alunos;
 
     }
 }
