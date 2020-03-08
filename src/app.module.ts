@@ -13,7 +13,7 @@ import { enderecoModule } from './enderecos/endereco.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres',
+      host: 'localhost', // 'localhost' if running locally, 'postgres' if on docker compose
       port: 5432,
       username: 'postgres',
       password: '123',

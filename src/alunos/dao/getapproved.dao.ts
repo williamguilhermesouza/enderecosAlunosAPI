@@ -1,0 +1,1 @@
+// dto to work with approved function data
