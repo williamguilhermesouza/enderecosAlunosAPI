@@ -2,6 +2,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsString, IsNumber } from 'class-validator';
 
+// this data transfer object deals with the data received from 
+// the html protocol
+
 export class CreateAlunoDto {
     @IsInt()
     readonly id: number;

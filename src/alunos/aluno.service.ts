@@ -6,6 +6,11 @@ import { Aluno } from './aluno.entity';
 import cpfValidator from './utils/cpfValidator';
 import { BadRequestException } from '@nestjs/common';
 
+// the code will be improved with the data access object,
+// this way, the service (business logic layer) won't need
+// to know details about the database (as importing the entity)
+// all this work will be done at the dao database layer
+
 // creating an injectable service with the functions
 @Injectable()
 export class alunoService {
