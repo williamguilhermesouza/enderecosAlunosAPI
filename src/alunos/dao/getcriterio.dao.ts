@@ -1,1 +1,0 @@
-// dao to work with criterio function data

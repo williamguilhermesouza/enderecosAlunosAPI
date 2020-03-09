@@ -1,4 +1,4 @@
-// data access object to return alunos
+// data access object to return alunos, interface to the dao
 
 // to output with dots
 // SELECT CONCAT(SUBSTR(cpf,1,3),
