@@ -6,3 +6,11 @@
 
 // to input without dots
 // SELECT REPLACE(nome, 'i', 'y') FROM aluno WHERE nome LIKE 'william';
+
+import { alunoImplementation } from './alunoimplementation.dao';
+import { alunoModel } from './alunomodel.dao';
+
+export interface alunoInterface {
+    // function to create a new aluno
+    
+}
