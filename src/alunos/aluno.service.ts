@@ -6,6 +6,9 @@ import { Aluno } from './aluno.entity';
 import cpfValidator from './utils/cpfValidator';
 import { BadRequestException } from '@nestjs/common';
 
+import { alunoDao } from './dao/alunoimplementation.dao';
+import { alunoDaoModel } from './dao/alunomodel.dao';
+
 // the code will be improved with the data access object,
 // this way, the service (business logic layer) won't need
 // to know details about the database (as importing the entity)
@@ -17,15 +20,16 @@ export class alunoService {
 
     //using constructor to inject aluno entity into the service
     constructor(
-        @InjectRepository(Aluno)
-        private readonly alunoRepository: Repository<Aluno>,
+        //@InjectRepository(Aluno)
+        //private readonly alunoRepository: Repository<Aluno>,
+        private readonly alunoDao: alunoDao,
     ) {}
 
     cpfOutParser(cpf) {
         cpf = [cpf.slice(0,3), '.', cpf.slice(3,6), '.', cpf.slice(6,9), '-',cpf.slice(9)].join('');
         return cpf;
     }
-
+/*
     // function to create a new aluno
     async create(aluno: Aluno): Promise<Aluno> {
         let cpf = aluno.cpf;
@@ -66,9 +70,10 @@ export class alunoService {
     async delete(id: number): Promise<Aluno> {
         return await this.alunoRepository.remove(await this.alunoRepository.findOne(id));
     }
-
+*/
     // function that returns an array of all alunos
     async findAll(): Promise<Aluno[]> {
+        /*
         let alunos = await this.alunoRepository.find();
 
         alunos.map((aluno) => {
@@ -76,7 +81,11 @@ export class alunoService {
         });
 
         return alunos;
+        */
+        return await this.alunoDao.find();
     }
+
+/*
 
     // function that returns an aluno with nota matching criterio (lt for < 
     // and bt for >)
@@ -115,4 +124,6 @@ export class alunoService {
         return alunos;
 
     }
+
+*/    
 }
