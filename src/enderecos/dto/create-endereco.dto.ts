@@ -1,6 +1,6 @@
 // creating the dto to receive the endereco from body requests
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString, IsIn, IsOptional } from 'class-validator';
+import { IsInt, IsString, IsOptional } from 'class-validator';
 
 export class CreateEnderecoDto {
     @IsInt()

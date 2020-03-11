@@ -7,10 +7,17 @@
 // to input without dots
 // SELECT REPLACE(nome, 'i', 'y') FROM aluno WHERE nome LIKE 'william';
 
+import { Aluno } from '../aluno.entity';
 import { alunoImplementation } from './alunoimplementation.dao';
-import { alunoModel } from './alunomodel.dao';
 
-export interface alunoInterface {
-    // function to create a new aluno
-    
+// interface that lists the methods of the DAO, for access 
+// from the service 
+export interface alunoDAO {
+    create(aluno: Aluno): Promise<Aluno>;
+    update(aluno: Aluno): Promise<Aluno>;
+    findOne(id: number): string;
+    delete(id: number): Promise<Aluno>;
+    findAll(): Promise<Aluno[]>;
+    //getAlunoCriterio(aluno: any): Promise<Aluno[]>;
+    //approved(aluno: any): Promise<Aluno[]>;
 }
