@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
 import { Aluno } from '../aluno.entity';
 
 // beginning the model structure working with the basic 
@@ -21,16 +20,20 @@ export class alunoDaoModel {
          
     }
 
+    async __update(id: number, aluno: Aluno): Promise<{}> {
+        await this.alunoRepository.update(id, aluno);
+        return {'msg': `Successfully updated aluno with id ${id}`};
+    }
+
     // returns the aluno with the given id
     async __findOne(id: number): Promise<Aluno> {
         return await this.alunoRepository.findOne(id);
     }
 
     // delete the aluno with the given id and returns it
-    async __delete(id: number): Promise<Aluno> {
-        let aluno = await this.alunoRepository.findOne(id);
+    async __delete(id: number): Promise<{}> {
         await this.alunoRepository.delete(id);
-        return aluno;
+        return {'msg': `Successfully deleted aluno with id ${id}`};
     }
 
     // function that returns an array of all alunos

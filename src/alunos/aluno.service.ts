@@ -40,7 +40,7 @@ export class alunoService {
     }
 
     // if aluno exist, update it, if not create it
-    async update(id: number, aluno: Aluno): Promise<Aluno> {
+    async update(id: number, aluno: Aluno): Promise<{}> {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
         cpf = cpf.split('-').join('');
@@ -61,7 +61,7 @@ export class alunoService {
     }
 
     // delete the aluno with the given id and returns it
-    async delete(id: number): Promise<Aluno> {
+    async delete(id: number): Promise<{}> {
         return await this.alunoDao.delete(id);
     }
 

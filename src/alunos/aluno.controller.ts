@@ -21,7 +21,7 @@ export class alunoController {
     // route to modify an existing aluno, or create a new if it
     // don't exist
     @Put(':id')
-    updateAluno(@Body() updateAlunoDto: CreateAlunoDto, @Param('id') id): Promise<Aluno> {
+    updateAluno(@Body() updateAlunoDto: CreateAlunoDto, @Param('id') id): Promise<{}> {
         return this.alunoService.update(id, updateAlunoDto);
     }
 
@@ -43,7 +43,7 @@ export class alunoController {
 
     // route to delete an aluno from the database
     @Delete(':id')
-    deleteAluno(@Param('id') id): Promise<Aluno> {
+    deleteAluno(@Param('id') id): Promise<{}> {
         return this.alunoService.delete(id);
     }
 

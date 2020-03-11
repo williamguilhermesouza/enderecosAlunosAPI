@@ -13,8 +13,8 @@ export class alunoDao extends alunoDaoModel implements alunoDaoInterface {
     }
 
     // if aluno exist, update it, if not create it
-    async update(id: number, aluno: Aluno): Promise<Aluno> {
-        return await this.__save(aluno);
+    async update(id: number, aluno: Aluno): Promise<{}> {
+        return await this.__update(id, aluno);
         
     }
 
@@ -24,7 +24,7 @@ export class alunoDao extends alunoDaoModel implements alunoDaoInterface {
     }
 
     // delete the aluno with the given id and returns it
-    async delete(id: number): Promise<Aluno> {
+    async delete(id: number): Promise<{}> {
         return await this.__delete(id);
     }
 
