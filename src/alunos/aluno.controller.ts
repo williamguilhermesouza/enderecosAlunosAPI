@@ -44,7 +44,7 @@ export class alunoController {
 
     // route used to return only the aluno with matching id
     @Get(':id')
-    findOneAluno(@Param('id') id): string {
+    findOneAluno(@Param('id') id): Promise<Aluno> {
         return this.alunoService.findOne(id);
     }
 

@@ -1,5 +1,5 @@
 import { Aluno } from './aluno.entity';
-import { alunoDAO } from './dao/alunointerface.dao';
+import { alunoDAO } from './dao/alunoimplementation.dao';
 
 // the code will be improved with the data access object,
 // this way, the service (business logic layer) won't need
@@ -27,7 +27,7 @@ export class alunoService {
     }
 
     // returns the aluno with the given id
-    findOne(id: number): string {
+    findOne(id: number): Promise<Aluno> {
         return this.alunoDAO.findOne(id);
     }
 

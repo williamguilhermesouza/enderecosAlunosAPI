@@ -8,14 +8,13 @@
 // SELECT REPLACE(nome, 'i', 'y') FROM aluno WHERE nome LIKE 'william';
 
 import { Aluno } from '../aluno.entity';
-import { alunoImplementation } from './alunoimplementation.dao';
 
 // interface that lists the methods of the DAO, for access 
 // from the service 
-export interface alunoDAO {
+export interface alunoDaoInterface {
     create(aluno: Aluno): Promise<Aluno>;
     update(aluno: Aluno): Promise<Aluno>;
-    findOne(id: number): string;
+    findOne(id: number): Promise<Aluno>;
     delete(id: number): Promise<Aluno>;
     findAll(): Promise<Aluno[]>;
     //getAlunoCriterio(aluno: any): Promise<Aluno[]>;

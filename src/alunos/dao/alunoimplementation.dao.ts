@@ -1,32 +1,32 @@
 // implementation of the dao functions specified at the interface
 
-import { alunoModel } from './alunomodel.dao';
-import { alunoDAO } from './alunointerface.dao';
+import { alunoDaoModel } from './alunomodel.dao';
+import { alunoDaoInterface } from './alunointerface.dao';
 import { Aluno } from '../aluno.entity';
 
-export class alunoImplementation implements alunoDAO {
+export class alunoDAO implements alunoDaoInterface {
     // constructor that holds the alunoModel with basic CRUD
-    constructor(private readonly alunoModel: alunoModel) {};
+    constructor(private readonly alunoDaoModel: alunoDaoModel) {};
 
     //
     async create(aluno: Aluno): Promise<Aluno> {
-        return this.alunoModel.save(aluno);
+        return this.alunoDaoModel.save(aluno);
     }
 
     async update(aluno: Aluno): Promise<Aluno> {
-        return this.alunoModel.save(aluno);
+        return this.alunoDaoModel.save(aluno);
     }
 
-    findOne(id: number): string {
-        return 'testando';
+    async findOne(id: number): Promise<Aluno> {
+        return this.alunoDaoModel.findOne(id);
     }
 
     async delete(id: number): Promise<Aluno> {
-        return this.alunoModel.delete(id);
+        return this.alunoDaoModel.delete(id);
     }
 
     async findAll(): Promise<Aluno[]> {
-        return this.alunoModel.findAll();
+        return this.alunoDaoModel.findAll();
     }
 
     /*

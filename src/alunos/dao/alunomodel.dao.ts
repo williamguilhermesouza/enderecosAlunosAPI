@@ -7,9 +7,9 @@ import { Repository } from 'typeorm';
 import { Aluno } from '../aluno.entity';
 
 
-// creating an injectable service with the functions
+// creating an injectable model with the functions
 @Injectable()
-export class alunoModel {
+export class alunoDaoModel {
     //using constructor to inject aluno entity into the service
     constructor(
         @InjectRepository(Aluno)
