@@ -8,7 +8,6 @@
 // SELECT REPLACE(nome, 'i', 'y') FROM aluno WHERE nome LIKE 'william';
 
 import { Aluno } from '../aluno.entity';
-import { alunoDaoModel } from './alunomodel.dao';
 
 export interface alunoDaoInterface {
     find(): Promise<Aluno[]>;

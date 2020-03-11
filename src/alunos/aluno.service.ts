@@ -7,7 +7,6 @@ import cpfValidator from './utils/cpfValidator';
 import { BadRequestException } from '@nestjs/common';
 
 import { alunoDao } from './dao/alunoimplementation.dao';
-import { alunoDaoModel } from './dao/alunomodel.dao';
 
 // the code will be improved with the data access object,
 // this way, the service (business logic layer) won't need
