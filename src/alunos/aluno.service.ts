@@ -1,10 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import { Aluno } from './aluno.entity';
 import cpfValidator from './utils/cpfValidator';
-import { BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 
 import { alunoDao } from './dao/alunoimplementation.dao';
 
@@ -19,8 +16,6 @@ export class alunoService {
 
     //using constructor to inject aluno entity into the service
     constructor(
-        //@InjectRepository(Aluno)
-        //private readonly alunoRepository: Repository<Aluno>,
         private readonly alunoDao: alunoDao,
     ) {}
 
@@ -28,7 +23,7 @@ export class alunoService {
         cpf = [cpf.slice(0,3), '.', cpf.slice(3,6), '.', cpf.slice(6,9), '-',cpf.slice(9)].join('');
         return cpf;
     }
-/*
+
     // function to create a new aluno
     async create(aluno: Aluno): Promise<Aluno> {
         let cpf = aluno.cpf;
@@ -36,7 +31,7 @@ export class alunoService {
         cpf = cpf.split('-').join('');
         if (cpfValidator(cpf)) {
             aluno.cpf = cpf;
-            return await this.alunoRepository.save(aluno); 
+            return await this.alunoDao.create(aluno);
         }
         else {
             throw new BadRequestException(`Invalid CPF: ${aluno.cpf}`);
@@ -51,7 +46,7 @@ export class alunoService {
         cpf = cpf.split('-').join('');
         if (cpfValidator(cpf)) {
             aluno.cpf = cpf;
-            return await this.alunoRepository.save(aluno);
+            return await this.alunoDao.update(id, aluno);
         }
         else {
             throw new BadRequestException(`Invalid CPF: ${aluno.cpf}`);
@@ -60,39 +55,34 @@ export class alunoService {
 
     // returns the aluno with the given id
     async findOne(id: number): Promise<Aluno> {
-        let aluno = await this.alunoRepository.findOne(id);
+        let aluno = await this.alunoDao.findOne(id);
         aluno.cpf = this.cpfOutParser(aluno.cpf);
         return aluno;
     }
 
     // delete the aluno with the given id and returns it
     async delete(id: number): Promise<Aluno> {
-        return await this.alunoRepository.remove(await this.alunoRepository.findOne(id));
+        return await this.alunoDao.delete(id);
     }
-*/
+
     // function that returns an array of all alunos
     async findAll(): Promise<Aluno[]> {
-        /*
-        let alunos = await this.alunoRepository.find();
+        let alunos = await this.alunoDao.findAll();
 
         alunos.map((aluno) => {
             aluno.cpf = this.cpfOutParser(aluno.cpf);
         });
 
         return alunos;
-        */
-        return await this.alunoDao.find();
+        
     }
 
-/*
+
 
     // function that returns an aluno with nota matching criterio (lt for < 
     // and bt for >)
     async getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
-        let alunos = await this.alunoRepository
-            .createQueryBuilder("aluno")
-            .where(`aluno.nota ${criterio} ${nota}`)
-            .getMany();
+        let alunos = await this.alunoDao.getAlunoCriterio(nota, criterio);
 
         alunos.map((aluno) => {
             aluno.cpf = this.cpfOutParser(aluno.cpf);
@@ -104,17 +94,7 @@ export class alunoService {
     // returns an array of aluno that has nota bigger than the average
     // of all aluno nota
     async approved(): Promise<Aluno[]> {
-        let avg =  await this.alunoRepository
-            .createQueryBuilder("aluno")
-            .select("AVG(aluno.nota)")
-            .getRawOne();
-            
-        avg = Math.round(parseFloat(avg.avg));
-
-        let alunos = await this.alunoRepository
-            .createQueryBuilder("aluno")
-            .where(`aluno.nota > ${avg}`)
-            .getMany();
+        let alunos = await this.alunoDao.approved();
 
         alunos.map((aluno) => {
             aluno.cpf = this.cpfOutParser(aluno.cpf);
@@ -124,5 +104,5 @@ export class alunoService {
 
     }
 
-*/    
+  
 }

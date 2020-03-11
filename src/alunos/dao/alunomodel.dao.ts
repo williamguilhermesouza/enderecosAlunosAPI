@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { Aluno } from '../aluno.entity';
 
 // beginning the model structure working with the basic 
-// CRUD operations, to separate then from the service
+// DB interactions, to separate then from the service
 
 @Injectable()
 export class alunoDaoModel {
@@ -16,11 +16,59 @@ export class alunoDaoModel {
         private readonly alunoRepository: Repository<Aluno>,
     ) {}
 
+    async __save(aluno: Aluno): Promise<Aluno> {
+        return await this.alunoRepository.save(aluno); 
+         
+    }
+
+    // returns the aluno with the given id
+    async __findOne(id: number): Promise<Aluno> {
+        return await this.alunoRepository.findOne(id);
+    }
+
+    // delete the aluno with the given id and returns it
+    async __delete(id: number): Promise<Aluno> {
+        let aluno = await this.alunoRepository.findOne(id);
+        await this.alunoRepository.delete(id);
+        return aluno;
+    }
+
     // function that returns an array of all alunos
-    async getAll(): Promise<Aluno[]> {
+    async __find(): Promise<Aluno[]> {
         let alunos = await this.alunoRepository.find();
+        return alunos;    
+    }
+
+
+    // function that returns an aluno with nota matching criterio (lt for < 
+    // and bt for >)
+    async __getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
+        let alunos = await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .where(`aluno.nota ${criterio} ${nota}`)
+            .getMany();
 
         return alunos;
+    }
+
+    // returns an array of aluno that has nota bigger than the average
+    // of all aluno nota
+    async __approved(): Promise<Aluno[]> {
+        let avg =  await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .select("AVG(aluno.nota)")
+            .getRawOne();
+            
+        avg = Math.round(parseFloat(avg.avg));
+
+        let alunos = await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .where(`aluno.nota > ${avg}`)
+            .getMany();
+
+
+        return alunos;
+
     }
 
 }

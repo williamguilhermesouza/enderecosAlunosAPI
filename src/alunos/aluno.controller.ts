@@ -12,9 +12,6 @@ export class alunoController {
     // into the controller
     constructor(private readonly alunoService: alunoService) {}
 
-/*
-
-
     // route to create a new aluno
     @Post()
     createAluno(@Body() createAlunoDto: CreateAlunoDto): Promise<Aluno> {
@@ -27,15 +24,7 @@ export class alunoController {
     updateAluno(@Body() updateAlunoDto: CreateAlunoDto, @Param('id') id): Promise<Aluno> {
         return this.alunoService.update(id, updateAlunoDto);
     }
-/*
-    @Get(':route')
-    routeParser(@Param('route') route) {
-        if (route == 'media')
-            return this.getApproved();
-        else
-            return this.findOneAluno(route);
-    }
-// FIM    
+
 
     // return the data of all alunos that have nota bigger than the 
     // average of all aluno notas
@@ -57,23 +46,21 @@ export class alunoController {
     deleteAluno(@Param('id') id): Promise<Aluno> {
         return this.alunoService.delete(id);
     }
-*/
+
     // route to return a json of all alunos
     @Get()
     findAllAlunos(): Promise<Aluno[]> {
         return this.alunoService.findAll();
     }
 
-/*
+
 
     // returns all alunos with nota depending on the criterio,
     // the criterio may be bigger than (>) or less than (<)
     @Get(':nota/criterio/:criterio')
     getAlunoCriterio(@Param('nota') nota, @Param('criterio') criterio): Promise<Aluno[]> {
         return this.alunoService.getAlunoCriterio(nota, criterio);
-    }
-
-*/  
+    } 
 
 
 }

@@ -10,5 +10,11 @@
 import { Aluno } from '../aluno.entity';
 
 export interface alunoDaoInterface {
-    find(): Promise<Aluno[]>;
+    create(aluno: Aluno): Promise<Aluno>;
+    update(id: number, aluno: Aluno): Promise<Aluno>;
+    findOne(id: number): Promise<Aluno>;
+    delete(id: number): Promise<Aluno>;
+    findAll(): Promise<Aluno[]>;
+    getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]>;
+    approved(): Promise<Aluno[]>;
 }
