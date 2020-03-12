@@ -21,18 +21,10 @@ export class alunoController {
     // route to modify an existing aluno, or create a new if it
     // don't exist
     @Put(':id')
-    updateAluno(@Body() updateAlunoDto: CreateAlunoDto, @Param('id') id): Promise<Aluno> {
+    updateAluno(@Body() updateAlunoDto: CreateAlunoDto, @Param('id') id): Promise<{}> {
         return this.alunoService.update(id, updateAlunoDto);
     }
-/*
-    @Get(':route')
-    routeParser(@Param('route') route) {
-        if (route == 'media')
-            return this.getApproved();
-        else
-            return this.findOneAluno(route);
-    }
-*/    
+
 
     // return the data of all alunos that have nota bigger than the 
     // average of all aluno notas
@@ -51,7 +43,7 @@ export class alunoController {
 
     // route to delete an aluno from the database
     @Delete(':id')
-    deleteAluno(@Param('id') id): Promise<Aluno> {
+    deleteAluno(@Param('id') id): Promise<{}> {
         return this.alunoService.delete(id);
     }
 
@@ -61,14 +53,14 @@ export class alunoController {
         return this.alunoService.findAll();
     }
 
+
+
     // returns all alunos with nota depending on the criterio,
     // the criterio may be bigger than (>) or less than (<)
     @Get(':nota/criterio/:criterio')
     getAlunoCriterio(@Param('nota') nota, @Param('criterio') criterio): Promise<Aluno[]> {
         return this.alunoService.getAlunoCriterio(nota, criterio);
-    }
-
-    
+    } 
 
 
 }

@@ -3,11 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Endereco } from './endereco.entity';
 import { enderecoService } from './endereco.service';
 import { enderecoController } from './endereco.controller';
+import { enderecoDao } from './dao/enderecoimplementation.dao';
 
 // encapsulating all aluno elements
 @Module({
     imports: [TypeOrmModule.forFeature([Endereco])],
-    providers: [enderecoService],
+    providers: [enderecoService, enderecoDao],
     controllers: [enderecoController],
 
 })
