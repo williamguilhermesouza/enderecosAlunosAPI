@@ -35,6 +35,29 @@ export class enderecoDaoModel {
 
     // makes a query for all the enderecos from the aluno with the given id
     async __queryAlunoEndereco(id: number): Promise<{}> {
+        let [enderecos, quantity] = await this.enderecoRepository.findAndCount({
+            join: {
+                alias: 'endereco',
+                leftJoinAndSelect: {
+                    rua: 'endereco.rua',
+                    numero: 'endereco.numero',
+                    complemento: 'endereco.complemento',
+                }
+            },
+            select: ['bairro'],
+            where: {'aluno_id': id}
+        })
+
+        return {'total': quantity,
+                'enderecos': enderecos,
+            };
+
+
+
+
+
+            /*
+
         let [enderecos, quantity] = await this.enderecoRepository
             .createQueryBuilder("endereco")
             .select("endereco.rua")
@@ -59,6 +82,9 @@ export class enderecoDaoModel {
         }
 
         return queryResults;
+
+
+        */
     }
 
 }
