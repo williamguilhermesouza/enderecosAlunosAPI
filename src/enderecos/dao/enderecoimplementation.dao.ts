@@ -26,7 +26,19 @@ export class enderecoDao extends enderecoDaoModel implements enderecoDaoInterfac
 
     // makes a query for all the enderecos from the aluno with the given id
     async queryAlunoEndereco(id: number): Promise<{}> {
-        let enderecos = await this.__queryAlunoEndereco(id);
-        return enderecos;
+        let query = await this.__queryAlunoEndereco(id);
+        
+        // map function for formatting
+        const formatedEnderecos = query['enderecos'].map((endereco): {} => {
+            return {
+                "endereco": `${endereco.rua}, ${endereco.numero} - ${endereco.complemento}`,
+                "bairro": endereco.bairro,
+            }
+        });
+
+        query['enderecos'] = formatedEnderecos;
+
+        return query;
+
     }
 }

@@ -33,31 +33,9 @@ export class enderecoDaoModel {
         return enderecos;
     }
 
-    // makes a query for all the enderecos from the aluno with the given id
+    // makes a query for all the enderecos from the aluno with the given id,
+    // would be improved by returning ready formatted info from DB
     async __queryAlunoEndereco(id: number): Promise<{}> {
-        let [enderecos, quantity] = await this.enderecoRepository.findAndCount({
-            join: {
-                alias: 'endereco',
-                leftJoinAndSelect: {
-                    rua: 'endereco.rua',
-                    numero: 'endereco.numero',
-                    complemento: 'endereco.complemento',
-                }
-            },
-            select: ['bairro'],
-            where: {'aluno_id': id}
-        })
-
-        return {'total': quantity,
-                'enderecos': enderecos,
-            };
-
-
-
-
-
-            /*
-
         let [enderecos, quantity] = await this.enderecoRepository
             .createQueryBuilder("endereco")
             .select("endereco.rua")
@@ -67,24 +45,10 @@ export class enderecoDaoModel {
             .where(`aluno_id = ${id}`)
             .getManyAndCount();
 
-        // map function for formatting
-        const formatedEnderecos = enderecos.map((endereco): {} => {
-            return {
-                "endereco": `${endereco.rua}, ${endereco.numero} - ${endereco.complemento}`,
-                "bairro": endereco.bairro,
-            }
-        });
+        return {'total': quantity,
+                'enderecos': enderecos,
+            };
 
-        // more formatting
-        const queryResults = {
-            "total": quantity,
-            "enderecos": formatedEnderecos,
-        }
-
-        return queryResults;
-
-
-        */
     }
 
 }
