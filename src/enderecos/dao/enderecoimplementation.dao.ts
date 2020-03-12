@@ -12,7 +12,15 @@ export class enderecoDao extends enderecoDaoModel implements enderecoDaoInterfac
 
     // returns all enderecos in the database
     async find(bairro?): Promise<Endereco[]> {
-        let enderecos =  await this.__find(bairro);
+        let enderecos: Endereco[];
+        
+        if (bairro) {
+            enderecos = await this.__filter(bairro);
+        }
+        else {
+            enderecos =  await this.__find();
+        }
+        
         return enderecos;
     }
 

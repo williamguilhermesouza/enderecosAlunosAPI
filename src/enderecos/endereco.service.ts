@@ -20,7 +20,6 @@ export class enderecoService {
     // returns all enderecos in the database
     async findAll(bairro?): Promise<Endereco[]> {
         let enderecos =  await this.enderecoDao.find(bairro);
-        
         return enderecos;
     }
 

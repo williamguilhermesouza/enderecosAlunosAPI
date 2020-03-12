@@ -22,14 +22,14 @@ export class enderecoDaoModel {
     }
 
     // returns all enderecos in the database
-    async __find(bairro?): Promise<Endereco[]> {
+    async __find(): Promise<Endereco[]> {
         let enderecos =  await this.enderecoRepository.find();
-        
-        if (bairro) {
-            enderecos = enderecos.filter((endereco) => {
-                return endereco.bairro == bairro;
-            });    
-        }
+        return enderecos;
+    }
+
+    // returns all enderecos where bairro=bairro filter
+    async __filter(bairro): Promise<Endereco[]> {
+        let enderecos = await this.enderecoRepository.find({ where: {'bairro': bairro }});
         return enderecos;
     }
 
