@@ -6,6 +6,15 @@ import { Aluno } from '../aluno.entity';
 // beginning the model structure working with the basic 
 // DB interactions, to separate then from the service
 
+
+// to output with dots query example (usage)
+// SELECT CONCAT(SUBSTR(cpf,1,3),
+//  '.', SUBSTR(cpf, 3,3), '.', SUBSTR(cpf, 6,3)) FROM aluno WHERE nome='william';
+
+// to input without dots (usage), wasn't used because this formatting
+// remained in service, because of the cpf validator
+// SELECT REPLACE(nome, 'i', 'y') FROM aluno WHERE nome LIKE 'william';
+
 @Injectable()
 export class alunoDaoModel {
 

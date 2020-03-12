@@ -1,4 +1,3 @@
-
 import { Aluno } from './aluno.entity';
 import cpfValidator from './utils/cpfValidator';
 import { Injectable, BadRequestException } from '@nestjs/common';
