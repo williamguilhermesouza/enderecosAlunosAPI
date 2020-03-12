@@ -48,7 +48,7 @@ export class alunoDaoModel {
     async __getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
         let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
-            .where(`aluno.nota ${criterio} ${nota}`)
+            .where(`aluno.nota ${criterio} ${nota}`) // SQLi??
             .getMany();
 
         return alunos;
@@ -57,16 +57,9 @@ export class alunoDaoModel {
     // returns an array of aluno that has nota bigger than the average
     // of all aluno nota
     async __approved(): Promise<Aluno[]> {
-        let avg =  await this.alunoRepository
-            .createQueryBuilder("aluno")
-            .select("AVG(aluno.nota)")
-            .getRawOne();
-            
-        avg = Math.round(parseFloat(avg.avg));
-
         let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
-            .where(`aluno.nota > ${avg}`)
+            .where('aluno.nota > ANY (SELECT ROUND(AVG(aluno.nota)) FROM aluno)')
             .getMany();
 
 

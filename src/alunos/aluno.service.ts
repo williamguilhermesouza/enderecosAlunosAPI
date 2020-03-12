@@ -5,11 +5,6 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 
 import { alunoDao } from './dao/alunoimplementation.dao';
 
-// the code will be improved with the data access object,
-// this way, the service (business logic layer) won't need
-// to know details about the database (as importing the entity)
-// all this work will be done at the dao database layer
-
 // creating an injectable service with the functions
 @Injectable()
 export class alunoService {
@@ -39,7 +34,7 @@ export class alunoService {
         
     }
 
-    // if aluno exist, update it, if not create it
+    // function to update an aluno and return a message
     async update(id: number, aluno: Aluno): Promise<{}> {
         let cpf = aluno.cpf;
         cpf = cpf.split('.').join('');
@@ -60,7 +55,7 @@ export class alunoService {
         return aluno;
     }
 
-    // delete the aluno with the given id and returns it
+    // delete the aluno with the given id and returns a message
     async delete(id: number): Promise<{}> {
         return await this.alunoDao.delete(id);
     }
