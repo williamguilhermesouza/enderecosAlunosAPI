@@ -27,7 +27,21 @@ export class alunoDaoModel {
 
     // returns the aluno with the given id
     async __findOne(id: number): Promise<Aluno> {
-        return await this.alunoRepository.findOne(id);
+        let alunos = await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .select('aluno.id AS id')
+            .addSelect('aluno.nome AS nome')
+            .addSelect('aluno.data_nascimento AS data_nascimento')
+            .addSelect('aluno.nota AS nota')
+            .addSelect(`CONCAT(SUBSTR(aluno.cpf,1,3), '.',
+                SUBSTR(aluno.cpf, 4,3), '.',
+                SUBSTR(aluno.cpf, 7,3), '-',
+                SUBSTR(aluno.cpf, 10,3))
+                AS cpf`)
+            .where(`aluno.id = ${id}`)
+            .getRawOne();
+
+        return alunos;
     }
 
     // delete the aluno with the given id and returns it
@@ -38,7 +52,19 @@ export class alunoDaoModel {
 
     // function that returns an array of all alunos
     async __find(): Promise<Aluno[]> {
-        let alunos = await this.alunoRepository.find();
+        let alunos = await this.alunoRepository
+            .createQueryBuilder("aluno")
+            .select('aluno.id AS id')
+            .addSelect('aluno.nome AS nome')
+            .addSelect('aluno.data_nascimento AS data_nascimento')
+            .addSelect('aluno.nota AS nota')
+            .addSelect(`CONCAT(SUBSTR(aluno.cpf,1,3), '.',
+                SUBSTR(aluno.cpf, 4,3), '.',
+                SUBSTR(aluno.cpf, 7,3), '-',
+                SUBSTR(aluno.cpf, 10,3))
+                AS cpf`)
+            .getRawMany();
+            
         return alunos;    
     }
 
@@ -48,8 +74,17 @@ export class alunoDaoModel {
     async __getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
         let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
+            .select('aluno.id AS id')
+            .addSelect('aluno.nome AS nome')
+            .addSelect('aluno.data_nascimento AS data_nascimento')
+            .addSelect('aluno.nota AS nota')
+            .addSelect(`CONCAT(SUBSTR(aluno.cpf,1,3), '.', 
+                SUBSTR(aluno.cpf, 4,3), '.',
+                SUBSTR(aluno.cpf, 7,3), '-',
+                SUBSTR(aluno.cpf, 10,3))
+                AS cpf`)
             .where(`aluno.nota ${criterio} ${nota}`) // SQLi??
-            .getMany();
+            .getRawMany();
 
         return alunos;
     }
@@ -59,9 +94,17 @@ export class alunoDaoModel {
     async __approved(): Promise<Aluno[]> {
         let alunos = await this.alunoRepository
             .createQueryBuilder("aluno")
+            .select('aluno.id AS id')
+            .addSelect('aluno.nome AS nome')
+            .addSelect('aluno.data_nascimento AS data_nascimento')
+            .addSelect('aluno.nota AS nota')
+            .addSelect(`CONCAT(SUBSTR(aluno.cpf,1,3), '.', 
+                SUBSTR(aluno.cpf, 4,3), '.',
+                SUBSTR(aluno.cpf, 7,3), '-',
+                SUBSTR(aluno.cpf, 10,3))
+                AS cpf`)
             .where('aluno.nota > ANY (SELECT ROUND(AVG(aluno.nota)) FROM aluno)')
-            .getMany();
-
+            .getRawMany();
 
         return alunos;
 
