@@ -63,4 +63,11 @@ aluno_id| fk integer not null|
 
 Also, the application has a dockerfile and docker compose yml config file, and it can be built and run inside containers.
 
+#### CHANGELOG
+
+|version| Modifications|
+--------|--------------|
+1.0| API construction|
+1.1| Separation of DB access through DAO|
+
 ## AUTHOR: WILLIAM SOUZA
