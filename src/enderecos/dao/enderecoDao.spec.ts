@@ -34,25 +34,26 @@ class EnderecoDaoModelMock {
         return result;
     }
     __queryAlunoEndereco(id: number) {
-        return {
+        const result: {} = {
             total: 1,
             enderecos: {
                 rua: 'riodades',
                 numero: '143',
                 complemento: 'apt 202',
                 bairro: 'fonseca',
-        },
-    };
-;
+            },
+        };
+
+        return new Promise((res,rej) => result);
     }
 }
 
 describe('enderecoDAO', () => {
     let EnderecoDao: enderecoDao;
     let EnderecoDaoModel: enderecoDaoModel;
-
     
-    beforeEach(async () => {
+
+    beforeAll(async () => {
         const enderecoDaoModelProvider = {
             provide: enderecoDaoModel,
             useClass: EnderecoDaoModelMock,
@@ -65,9 +66,6 @@ describe('enderecoDAO', () => {
         EnderecoDaoModel = module.get<enderecoDaoModel>(enderecoDaoModel);
         EnderecoDao = module.get<enderecoDao>(enderecoDao);
 
-    });
-
-    beforeAll(() => {
         const enderecoArray: Endereco[] = [{
             id: 1,
             rua: 'riodades',
@@ -86,14 +84,12 @@ describe('enderecoDAO', () => {
             aluno_id: 1
         };
 
-        const enderecoQuery = {
-            total: 1,
-            enderecos: {
-                endereco: 'riodades 143 apt 202',
-                bairro: 'fonseca',
-            },
-        };
+        
     });
+
+    afterEach(() => {
+        jest.resetAllMocks();
+    }); 
 
     describe('save', () => {
         it('should save endereco to DB', async () => {
@@ -117,9 +113,35 @@ describe('enderecoDAO', () => {
     });
 
     describe('queryAlunoEndereco', () => {
+        const enderecoQuery = {
+            total: 1,
+            enderecos: {
+                endereco: 'riodades 143 apt 202',
+                bairro: 'fonseca',
+            },
+        };
+
+
         it('should return object with query results', async () => {
+            EnderecoDao.__queryAlunoEndereco = jest.fn().mockResolvedValue({
+                total: 1,
+                enderecos: {
+                    map: enderecos => { 
+                        return {
+                            endereco: 'riodades 143 apt 202',
+                            bairro: 'fonseca',
+                        }
+                    },
+                    rua: 'riodades',
+                    numero: '143',
+                    complemento: 'apt 202',
+                    bairro: 'fonseca',
+                },
+            });
             const result = await EnderecoDao.queryAlunoEndereco(1);
-            expect(result).toEqual(this.enderecoQuery);
+            expect(await EnderecoDao.__queryAlunoEndereco(1)).toEqual(enderecoQuery);
+            return; 
+            
         });
     });
 });
