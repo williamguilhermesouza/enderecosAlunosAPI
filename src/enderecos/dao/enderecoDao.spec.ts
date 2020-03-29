@@ -34,12 +34,13 @@ class EnderecoDaoModelMock {
         return result;
     }
     __queryAlunoEndereco(id: number) {
-        return {'total': 1,
-        'enderecos': {
-            rua: 'riodades',
-            numero: '143',
-            complemento: 'apt 202',
-            bairro: 'fonseca',
+        return {
+            total: 1,
+            enderecos: {
+                rua: 'riodades',
+                numero: '143',
+                complemento: 'apt 202',
+                bairro: 'fonseca',
         },
     };
 ;
@@ -86,20 +87,39 @@ describe('enderecoDAO', () => {
         };
 
         const enderecoQuery = {
-            'total': 1,
-            'enderecos': {
-                rua: 'riodades',
-                numero: '143',
-                complemento: 'apt 202',
+            total: 1,
+            enderecos: {
+                endereco: 'riodades 143 apt 202',
                 bairro: 'fonseca',
             },
         };
     });
 
+    describe('save', () => {
+        it('should save endereco to DB', async () => {
+            const result = await EnderecoDao.save(this.endereco);
+            expect(result).toEqual(this.endereco);
+        });
+    });
+
     describe('find without params', () => {
         it('should return all enderecos', async () => {
             const result = await EnderecoDao.find();
-            expect(this.enderecoArray).toEqual(result);
+            expect(result).toEqual(this.enderecoArray);
+        });
+    });
+
+    describe('find with params', () => {
+        it('should return Array of enderecos', async () => {
+            const result = await EnderecoDao.find('fonseca');
+            expect(result).toEqual(this.enderecosArray);
+        });
+    });
+
+    describe('queryAlunoEndereco', () => {
+        it('should return object with query results', async () => {
+            const result = await EnderecoDao.queryAlunoEndereco(1);
+            expect(result).toEqual(this.enderecoQuery);
         });
     });
 });

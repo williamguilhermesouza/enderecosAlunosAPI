@@ -8,7 +8,7 @@ describe('alunoController', () => {
 
     beforeEach(async () => {
         const module = await Test.createTestingModule({
-            controllers: [alunoController],
+            controllers: [enderecoController],
             providers: [enderecoService],
           }).compile();
 
