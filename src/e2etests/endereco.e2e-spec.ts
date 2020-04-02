@@ -9,7 +9,6 @@ import { Endereco } from '../enderecos/endereco.entity';
 jest.mock('../enderecos/dao/enderecoimplementation.dao');
 
 
-// should improve with bad outcomes test cases
 describe('--Endereco--', () => {
     let app: INestApplication;
 

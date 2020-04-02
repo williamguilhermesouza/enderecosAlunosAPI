@@ -8,7 +8,6 @@ import { Aluno } from '../alunos/aluno.entity';
 
 jest.mock('../alunos/dao/alunoimplementation.dao');
 
-// should be improved using bad ending test cases
 describe('--Aluno--', () => {
     let app: INestApplication;
 
