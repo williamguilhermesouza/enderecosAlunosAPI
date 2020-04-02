@@ -74,6 +74,9 @@ export class alunoService {
     // function that returns an aluno with nota matching criterio (lt for < 
     // and bt for >)
     async getAlunoCriterio(nota: number, criterio: string): Promise<Aluno[]> {
+        if (criterio != '<' && criterio != '>') {
+            throw new BadRequestException(`Invalid criterio: ${criterio}`);
+        }
         let alunos = await this.alunoDao.getAlunoCriterio(nota, criterio);
         return alunos;
     }
