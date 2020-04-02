@@ -77,7 +77,12 @@ describe('--alunoService--', () => {
 
     describe('-update-', () => {
         it('should update an existing aluno', async () => {
-            expect( AlunoService.update(idArgument, alunoArgument)).resolves.toEqual({});
+            try {
+                expect(await AlunoService.update(idArgument, alunoArgument)).toEqual({});
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
 
         it('should throw error', async () => {
@@ -92,7 +97,12 @@ describe('--alunoService--', () => {
 
     describe('-findOne-', () => {
         it('should return an existing aluno', async () => {
-            expect( AlunoService.findOne(idArgument)).resolves.toEqual(alunoArgument);
+            try {
+                expect(await AlunoService.findOne(idArgument)).toEqual(alunoArgument);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
 
         it('should throw error', async () => {
@@ -107,7 +117,12 @@ describe('--alunoService--', () => {
 
     describe('-delete-', () => {
         it('should delete an existing aluno', async () => {
-            expect( AlunoService.delete(idArgument)).resolves.toEqual({});
+            try {
+                expect(await AlunoService.delete(idArgument)).toEqual({});
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
 
         it('should throw error', async () => {
@@ -122,14 +137,24 @@ describe('--alunoService--', () => {
 
     describe('-findAll-', () => {
         it('should return an array of aluno', async () => {
-            expect( AlunoService.findAll()).resolves.toEqual([alunoArgument]);
+            try {
+                expect(await AlunoService.findAll()).toEqual([alunoArgument]);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
     });
 
 
     describe('-getAlunoCriterio-', () => {
         it('should update an existing aluno', async () => {
-            expect( AlunoService.getAlunoCriterio(7, '>')).resolves.toEqual({});
+            try {
+                expect(await AlunoService.getAlunoCriterio(7, '>')).toEqual({});
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
 
         it('should throw error', async () => {
@@ -143,7 +168,11 @@ describe('--alunoService--', () => {
 
     describe('-approved-', () => {
         it('should return an array of aluno with nota bigger than nota average', async () => {
-            expect( AlunoService.approved()).resolves.toEqual([alunoArgument]);
+            try {
+                expect(await AlunoService.approved()).toEqual([alunoArgument]);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
         });
     });
 

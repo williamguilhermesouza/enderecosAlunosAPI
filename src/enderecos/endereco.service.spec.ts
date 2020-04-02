@@ -47,23 +47,40 @@ describe('--enderecoService--', () => {
 
     describe('-create-', () => {
         it('should create a new endereco', async () => {
-            expect(await EnderecoService.create(enderecoArgument)).toEqual(enderecoArgument);
+            try {
+                expect(await EnderecoService.create(enderecoArgument)).toEqual(enderecoArgument);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+            
         });
     });
 
     describe('-findAll-', () => {
         it('should return all endereco without filter', async () => {
-            expect(EnderecoService.findAll()).resolves.toEqual([enderecoArgument]);
+            try {
+                expect(await EnderecoService.findAll()).resolves.toEqual([enderecoArgument]);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
         });
 
         it('should return endereco matching bairro filter', async () => {
-            expect(EnderecoService.findAll('fonseca')).resolves.toEqual([enderecoArgument]);
+            try {
+                expect(await EnderecoService.findAll('fonseca')).resolves.toEqual([enderecoArgument]);
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }     
         });
     });
 
     describe('-queryAlunoEndereco-', () => {
         it('should return all enderecos from aluno with matching id', async () => {
-            expect(EnderecoService.queryAlunoEndereco(idArgument)).resolves.toEqual({});
+            try {
+                expect(await EnderecoService.queryAlunoEndereco(idArgument)).resolves.toEqual({});
+            } catch(e) {
+                expect(e).toBeInstanceOf(Error);
+            }
         });
     });
     
