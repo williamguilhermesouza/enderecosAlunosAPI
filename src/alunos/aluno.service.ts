@@ -3,10 +3,11 @@ import cpfValidator from './utils/cpfValidator';
 import { Injectable, BadRequestException } from '@nestjs/common';
 
 import { alunoDao } from './dao/alunoimplementation.dao';
+import alunoServiceInterface from './aluno.service.interface';
 
 // creating an injectable service with the functions
 @Injectable()
-export class alunoService {
+export class alunoService implements alunoServiceInterface {
 
     //using constructor to inject aluno entity into the service
     constructor(
