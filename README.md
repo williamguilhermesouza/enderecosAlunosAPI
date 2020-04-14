@@ -70,5 +70,6 @@ Also, the application has a dockerfile and docker compose yml config file, and i
 1.0| API construction|
 1.1| Separation of DB access through DAO|
 1.2| Creation of Unit and e2e test|
+1.3| Implementation of Aluno and Endereco Services Interfaces|
 
 ## AUTHOR: WILLIAM SOUZA
