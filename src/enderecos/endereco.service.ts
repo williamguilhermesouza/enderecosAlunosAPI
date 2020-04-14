@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 import { Endereco } from './endereco.entity';
 import { enderecoDao } from './dao/enderecoimplementation.dao';
+import enderecoServiceInterface from './endereco.service.interface';
 
 // creating an injectable service with the functions
 @Injectable()
-export class enderecoService {
+export class enderecoService implements enderecoServiceInterface {
 
     //using constructor to instantiate Dao into the service
     constructor(
