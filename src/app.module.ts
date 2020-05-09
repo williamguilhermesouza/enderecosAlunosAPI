@@ -9,6 +9,8 @@ import { alunoModule } from './alunos/aluno.module';
 import { Endereco } from './enderecos/endereco.entity';
 import { enderecoModule } from './enderecos/endereco.module';
 
+import { GraphqlModule } from './graphql/graphql.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -23,6 +25,7 @@ import { enderecoModule } from './enderecos/endereco.module';
     }),
     alunoModule,
     enderecoModule,
+    GraphqlModule,
   ],
   controllers: [AppController],
   providers: [AppService],
