@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import { Aluno } from './alunos/aluno.entity';
 import { alunoModule } from './alunos/aluno.module';
@@ -23,6 +24,10 @@ import { enderecoModule } from './enderecos/endereco.module';
     }),
     alunoModule,
     enderecoModule,
+    GraphQLModule.forRoot({  // first works with graphql
+      autoSchemaFile: 'schema.gql',
+    }),
+
   ],
   controllers: [AppController],
   providers: [AppService],
