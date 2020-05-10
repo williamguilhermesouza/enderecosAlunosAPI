@@ -9,7 +9,7 @@ import { alunoModule } from './alunos/aluno.module';
 import { Endereco } from './enderecos/endereco.entity';
 import { enderecoModule } from './enderecos/endereco.module';
 
-import { GraphqlModule } from './graphql/graphql.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -25,7 +25,9 @@ import { GraphqlModule } from './graphql/graphql.module';
     }),
     alunoModule,
     enderecoModule,
-    GraphqlModule,
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

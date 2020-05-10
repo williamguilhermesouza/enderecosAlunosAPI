@@ -1,14 +1,16 @@
 import { Resolver, Query } from '@nestjs/graphql';
 import { alunoService } from '../alunos/aluno.service';
+import { AlunoGraphqlModel } from './models/aluno.model';
 
-@Resolver('Aluno')
-export class AlunoResolver {
+
+@Resolver(of => AlunoGraphqlModel)
+export class alunoResolver {
     constructor(
         private alunoService: alunoService,
     ) {}
 
-    @Query()
-    async getAluno() {
+    @Query(returns => [AlunoGraphqlModel])
+    async getAluno(): Promise<AlunoGraphqlModel[]> {
         return this.alunoService.findAll();
     }
 }
