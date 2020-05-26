@@ -1,4 +1,4 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { alunoService } from '../alunos/aluno.service';
 import { AlunoGraphqlModel } from './models/aluno.model';
 
@@ -10,7 +10,12 @@ export class alunoResolver {
     ) {}
 
     @Query(returns => [AlunoGraphqlModel])
-    async getAluno(): Promise<AlunoGraphqlModel[]> {
+    async Alunos(): Promise<AlunoGraphqlModel[]> {
         return this.alunoService.findAll();
+    }
+
+    @Query(returns => AlunoGraphqlModel)
+    async Aluno(@Args('id', { type: () => Int }) id: number): Promise<AlunoGraphqlModel> {
+    	return this.alunoService.findOne(id);
     }
 }
