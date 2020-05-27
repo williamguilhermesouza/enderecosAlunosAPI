@@ -18,4 +18,8 @@ export class alunoResolver {
     async Aluno(@Args('id', { type: () => Int }) id: number): Promise<AlunoGraphqlModel> {
     	return this.alunoService.findOne(id);
     }
+    @Query(returns => [AlunoGraphqlModel])
+    async AlunoCriterio(@Args('nota', {type: () => Int}) nota: number, @Args('criterio', {type: () => string})  criterio: string): Promise<AlunoGraphqlModel[]> {
+    	return this.alunoService.getAlunoCriterio(nota, criterio);
+    }
 }
