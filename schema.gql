@@ -18,4 +18,5 @@ scalar DateTime
 type Query {
   Alunos: [AlunoGraphqlModel!]!
   Aluno(id: Int!): AlunoGraphqlModel!
+  AlunoCriterio(criterio: String!, nota: Int!): [AlunoGraphqlModel!]!
 }
