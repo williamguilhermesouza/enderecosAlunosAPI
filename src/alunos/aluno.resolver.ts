@@ -1,7 +1,25 @@
-import { Resolver, Query, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, InputType, Field, ID } from '@nestjs/graphql';
 import { alunoService } from '../alunos/aluno.service';
 import { AlunoGraphqlModel } from './models/aluno.model';
 
+@InputType()
+class AlunoInput {
+    @Field(type => ID)
+    id: number;
+
+    @Field()
+    nome: string;
+
+    @Field()
+    data_nascimento: Date;
+
+    @Field()
+    cpf: string;
+
+    @Field(type => Int)
+    nota: number;
+
+}
 
 @Resolver(of => AlunoGraphqlModel)
 export class alunoResolver {
@@ -24,7 +42,7 @@ export class alunoResolver {
     }
 	
     @Mutation(returns => AlunoGraphqlModel)
-    async updateAluno(@Args('id', { type: () => Int }) id: number, @Args('Aluno', { type: () => AlunoGraphqlModel } aluno: {}): Promise<{}> {
+    async updateAluno(@Args('id', { type: () => Int }) id: number, @Args('aluno') aluno: AlunoInput): Promise<{}> {
 	return this.alunoService.update(id, aluno);
     }
 }

@@ -20,3 +20,15 @@ type Query {
   Aluno(id: Int!): AlunoGraphqlModel!
   AlunoCriterio(criterio: String!, nota: Int!): [AlunoGraphqlModel!]!
 }
+
+type Mutation {
+  updateAluno(aluno: AlunoInput!, id: Int!): AlunoGraphqlModel!
+}
+
+input AlunoInput {
+  id: ID!
+  nome: String!
+  data_nascimento: DateTime!
+  cpf: String!
+  nota: Int!
+}
