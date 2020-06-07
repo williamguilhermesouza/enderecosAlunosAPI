@@ -40,6 +40,11 @@ export class alunoResolver {
     async AlunoCriterio(@Args('nota', {type: () => Int}) nota: number, @Args('criterio')  criterio: string): Promise<AlunoGraphqlModel[]> {
     	return this.alunoService.getAlunoCriterio(nota, criterio);
     }
+
+    @Query(returns => [AlunoGraphqlModel])
+    async approved(): Promise<AlunoGraphqlModel[]> {
+	return this.alunoService.approved();
+    }
 	
     @Mutation(returns => AlunoGraphqlModel)
     async updateAluno(@Args('id', { type: () => Int }) id: number, @Args('aluno') aluno: AlunoInput): Promise<{}> {
