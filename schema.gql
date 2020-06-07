@@ -26,9 +26,9 @@ type Mutation {
 }
 
 input AlunoInput {
-  id: ID!
+  id: Float!
   nome: String!
   data_nascimento: DateTime!
+  nota: Float!
   cpf: String!
-  nota: Int!
 }

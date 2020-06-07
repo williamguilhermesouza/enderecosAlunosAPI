@@ -1,10 +1,10 @@
-import { Resolver, Query, Mutation, Args, Int, InputType, Field, ID } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, InputType, Field, Int } from '@nestjs/graphql';
 import { alunoService } from '../alunos/aluno.service';
 import { AlunoGraphqlModel } from './models/aluno.model';
 
 @InputType()
 class AlunoInput {
-    @Field(type => ID)
+    @Field()
     id: number;
 
     @Field()
@@ -14,10 +14,10 @@ class AlunoInput {
     data_nascimento: Date;
 
     @Field()
-    cpf: string;
-
-    @Field(type => Int)
     nota: number;
+
+    @Field()
+    cpf: string;
 
 }
 
@@ -43,6 +43,17 @@ export class alunoResolver {
 	
     @Mutation(returns => AlunoGraphqlModel)
     async updateAluno(@Args('id', { type: () => Int }) id: number, @Args('aluno') aluno: AlunoInput): Promise<{}> {
-	return this.alunoService.update(id, aluno);
+
+	const alunoObject = { 
+	    id: aluno.id,
+	    nome: aluno.nome,
+	    data_nascimento: aluno.data_nascimento,
+	    cpf: aluno.cpf,
+	    nota: aluno.nota,
+	};
+
+	this.alunoService.update(id, alunoObject);
+
+	return this.alunoService.findOne(id);
     }
 }
