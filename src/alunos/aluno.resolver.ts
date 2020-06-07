@@ -1,25 +1,7 @@
-import { Resolver, Query, Mutation, Args, InputType, Field, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { alunoService } from '../alunos/aluno.service';
 import { AlunoGraphqlModel } from './models/aluno.model';
-
-@InputType()
-class AlunoInput {
-    @Field()
-    id: number;
-
-    @Field()
-    nome: string;
-
-    @Field()
-    data_nascimento: Date;
-
-    @Field()
-    nota: number;
-
-    @Field()
-    cpf: string;
-
-}
+import { AlunoInput } from './models/aluno.input';
 
 @Resolver(of => AlunoGraphqlModel)
 export class alunoResolver {
