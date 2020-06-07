@@ -74,4 +74,11 @@ export class alunoResolver {
 
 	return this.alunoService.findOne(id);
     }
+
+    @Mutation(returns => AlunoGraphqlModel) 
+    async deleteAluno(@Args('id', { type: () => Int }) id: number): Promise<AlunoGraphqlModel> {
+	const deleted = this.alunoService.findOne(id);
+	this.alunoService.delete(id);
+	return deleted;
+    }
 }

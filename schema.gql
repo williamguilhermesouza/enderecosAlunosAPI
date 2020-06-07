@@ -25,6 +25,7 @@ type Query {
 type Mutation {
   createAluno(aluno: AlunoInput!): AlunoGraphqlModel!
   updateAluno(aluno: AlunoInput!, id: Int!): AlunoGraphqlModel!
+  deleteAluno(id: Int!): AlunoGraphqlModel!
 }
 
 input AlunoInput {
