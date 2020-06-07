@@ -45,6 +45,19 @@ export class alunoResolver {
     async approved(): Promise<AlunoGraphqlModel[]> {
 	return this.alunoService.approved();
     }
+
+    @Mutation(returns => AlunoGraphqlModel)
+    async createAluno(@Args('aluno') aluno: AlunoInput): Promise<AlunoGraphqlModel> {
+	const alunoObject = {
+	    id: aluno.id,
+	    nome: aluno.nome,
+	    data_nascimento: aluno.data_nascimento,
+	    cpf: aluno.cpf,
+	    nota: aluno.nota,
+	};
+
+	return this.alunoService.create(alunoObject);
+    }
 	
     @Mutation(returns => AlunoGraphqlModel)
     async updateAluno(@Args('id', { type: () => Int }) id: number, @Args('aluno') aluno: AlunoInput): Promise<{}> {
