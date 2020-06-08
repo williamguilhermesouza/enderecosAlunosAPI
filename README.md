@@ -1,10 +1,30 @@
 ## Lemobs Test API 
+![GitHub](https://img.shields.io/github/license/williamguilhermesouza/enderecosAlunosAPI)
+![Repo-size](https://img.shields.io/github/repo-size/williamguilhermesouza/enderecosAlunosAPI)
+![Last-commit](https://img.shields.io/github/last-commit/williamguilhermesouza/enderecosAlunosAPI)
 
 This application was build during a test applied by lemobs, that had as goal to build a REST API
 with NestJS and PostgreSQL DB. Also, the application docs where made using the swagger library, and 
 can be acessed using the 'api' route. 
 
+### How to use
+
+First download the application code via git clone:
+
+> $ git clone https://github.com/williamguilhermesouza/enderecosAlunosAPI.git
+
+Install packages:
+
+> $ yarn install
+
+Then run the application (you must have the configured postgreSQL DB, see dbscripts):
+
+> $ yarn start
+
+## API information
+
 The application is split between two main routes, as described below:
+
 ***
 ### **Alunos**
 
@@ -63,6 +83,37 @@ aluno_id| fk integer not null|
 
 Also, the application has a dockerfile and docker compose yml config file, and it can be built and run inside containers.
 
+### GraphQL
+
+Below, we have the above methods of the API mapped to the GraphQL:
+#### **Alunos**
+
+> **HOST:3000/aluno[GET]** : Alunos
+
+> **HOST:3000/aluno/media[GET]** : approved 
+
+> **HOST:3000/aluno/{nota}/criterio/{criterio}[GET]** : AlunoCriterio(nota, criterio)
+
+> **HOST:3000/aluno/{id}[GET]** : Aluno(id)
+
+> **HOST:3000/aluno/{id}[PUT]** : mutation updateAluno(id, aluno)
+
+> **HOST:3000/aluno/{id}[DELETE]** : mutation deleteAluno(id)
+
+> **HOST:3000/aluno[POST]** : mutation createAluno(aluno)
+***
+#### **Enderecos**
+
+> **HOST:3000/enderecos**[GET] : Enderecos
+
+> **HOST:3000/enderecos**[POST] : createEndereco(endereco)
+
+> **HOST:3000/aluno/{id}/endereco**[GET] : AlunoResidencia(id)
+
+***
+
+
+
 #### CHANGELOG
 
 |version| Modifications|
@@ -71,5 +122,6 @@ Also, the application has a dockerfile and docker compose yml config file, and i
 1.1| Separation of DB access through DAO|
 1.2| Creation of Unit and e2e test|
 1.3| Implementation of Aluno and Endereco Services Interfaces|
+1.4| Implementation of the API using GraphQL also keeping the original routes|
 
 ## AUTHOR: WILLIAM SOUZA
