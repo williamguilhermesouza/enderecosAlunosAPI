@@ -32,8 +32,8 @@ class EnderecoBairro {
 
 @ObjectType()
 export class AlunoEndereco {
-    @Field(type => EnderecoBairro)
-    enderecos: EnderecoBairro;
+    @Field(type => [EnderecoBairro])
+    enderecos: [EnderecoBairro];
 
     @Field(type => Int)
     total: number;

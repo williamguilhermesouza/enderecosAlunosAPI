@@ -30,7 +30,7 @@ type EnderecoBairro {
 }
 
 type AlunoEndereco {
-  enderecos: EnderecoBairro!
+  enderecos: [EnderecoBairro!]!
   total: Int!
 }
 
@@ -47,6 +47,7 @@ type Mutation {
   createAluno(aluno: AlunoInput!): AlunoGraphqlModel!
   updateAluno(aluno: AlunoInput!, id: Int!): AlunoGraphqlModel!
   deleteAluno(id: Int!): AlunoGraphqlModel!
+  createEndereco(endereco: EnderecoInput!): EnderecoGraphqlModel!
 }
 
 input AlunoInput {
@@ -55,4 +56,13 @@ input AlunoInput {
   data_nascimento: DateTime!
   nota: Float!
   cpf: String!
+}
+
+input EnderecoInput {
+  id: Float!
+  rua: String!
+  numero: String!
+  complemento: String!
+  bairro: String!
+  aluno_id: Float!
 }

@@ -16,8 +16,23 @@ export class enderecoResolver {
 
     @Query(returns => AlunoEndereco)
     async AlunoResidencia(@Args('id', { type: () => Int }) id: number): Promise<{}> {
-        return this.enderecoService.queryAlunoEndereco(id);
+        const enderecos = await this.enderecoService.queryAlunoEndereco(id);
+        return enderecos;
+        
     }
 
+    @Mutation(returns => EnderecoGraphqlModel)
+    async createEndereco(@Args('endereco') endereco: EnderecoInput): Promise<EnderecoGraphqlModel> {
+        const enderecoObject = {
+            id: endereco.id,
+            rua: endereco.rua,
+            numero: endereco.numero,
+            complemento: endereco.complemento,
+            bairro: endereco.bairro,
+            aluno_id: endereco.aluno_id,
+        };
+
+        return this.enderecoService.create(enderecoObject);
+    }
 
 }
