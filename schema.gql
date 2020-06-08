@@ -1,0 +1,68 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AlunoGraphqlModel {
+  id: ID!
+  nome: String!
+  data_nascimento: DateTime!
+  cpf: String!
+  nota: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type EnderecoGraphqlModel {
+  id: ID!
+  rua: String!
+  numero: String
+  complemento: String
+  bairro: String!
+  aluno_id: Int!
+}
+
+type EnderecoBairro {
+  endereco: String!
+  bairro: String!
+}
+
+type AlunoEndereco {
+  enderecos: [EnderecoBairro!]!
+  total: Int!
+}
+
+type Query {
+  Alunos: [AlunoGraphqlModel!]!
+  Aluno(id: Int!): AlunoGraphqlModel!
+  AlunoCriterio(criterio: String!, nota: Int!): [AlunoGraphqlModel!]!
+  approved: [AlunoGraphqlModel!]!
+  Enderecos(bairro: String): [EnderecoGraphqlModel!]!
+  AlunoResidencia(id: Int!): AlunoEndereco!
+}
+
+type Mutation {
+  createAluno(aluno: AlunoInput!): AlunoGraphqlModel!
+  updateAluno(aluno: AlunoInput!, id: Int!): AlunoGraphqlModel!
+  deleteAluno(id: Int!): AlunoGraphqlModel!
+  createEndereco(endereco: EnderecoInput!): EnderecoGraphqlModel!
+}
+
+input AlunoInput {
+  id: Float!
+  nome: String!
+  data_nascimento: DateTime!
+  nota: Float!
+  cpf: String!
+}
+
+input EnderecoInput {
+  id: Float!
+  rua: String!
+  numero: String!
+  complemento: String!
+  bairro: String!
+  aluno_id: Float!
+}
