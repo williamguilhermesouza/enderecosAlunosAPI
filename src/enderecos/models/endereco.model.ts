@@ -20,3 +20,21 @@ export class EnderecoGraphqlModel {
     @Field(type => Int)
     aluno_id: number;
 }
+
+@ObjectType()
+class EnderecoBairro {
+    @Field()
+    endereco: string;
+    
+    @Field()
+    bairro: string;
+}
+
+@ObjectType()
+export class AlunoEndereco {
+    @Field(type => EnderecoBairro)
+    enderecos: EnderecoBairro;
+
+    @Field(type => Int)
+    total: number;
+}

@@ -24,12 +24,23 @@ type EnderecoGraphqlModel {
   aluno_id: Int!
 }
 
+type EnderecoBairro {
+  endereco: String!
+  bairro: String!
+}
+
+type AlunoEndereco {
+  enderecos: EnderecoBairro!
+  total: Int!
+}
+
 type Query {
   Alunos: [AlunoGraphqlModel!]!
   Aluno(id: Int!): AlunoGraphqlModel!
   AlunoCriterio(criterio: String!, nota: Int!): [AlunoGraphqlModel!]!
   approved: [AlunoGraphqlModel!]!
   Enderecos(bairro: String): [EnderecoGraphqlModel!]!
+  AlunoResidencia(id: Int!): AlunoEndereco!
 }
 
 type Mutation {
