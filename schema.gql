@@ -15,11 +15,21 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type EnderecoGraphqlModel {
+  id: ID!
+  rua: String!
+  numero: String
+  complemento: String
+  bairro: String!
+  aluno_id: Int!
+}
+
 type Query {
   Alunos: [AlunoGraphqlModel!]!
   Aluno(id: Int!): AlunoGraphqlModel!
   AlunoCriterio(criterio: String!, nota: Int!): [AlunoGraphqlModel!]!
   approved: [AlunoGraphqlModel!]!
+  Enderecos(bairro: String): [EnderecoGraphqlModel!]!
 }
 
 type Mutation {

@@ -9,5 +9,9 @@ export class enderecoResolver {
         private readonly enderecoService: enderecoService,
     ) {}
 
+    @Query(returns => [EnderecoGraphqlModel])
+    async Enderecos(@Args('bairro', { nullable: true }) bairro?: string): Promise<EnderecoGraphqlModel[]> {
+        return this.enderecoService.findAll(bairro);
+    }
 
 }

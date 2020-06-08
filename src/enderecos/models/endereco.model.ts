@@ -8,10 +8,10 @@ export class EnderecoGraphqlModel {
     @Field()
     rua: string;
 
-    @Field()
+    @Field({ nullable: true })
     numero?: string;
 
-    @Field()
+    @Field({ nullable: true })
     complemento?: string;
 
     @Field()
