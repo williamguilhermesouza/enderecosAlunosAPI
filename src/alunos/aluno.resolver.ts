@@ -1,12 +1,12 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { alunoService } from '../alunos/aluno.service';
+import { alunoService } from './aluno.service';
 import { AlunoGraphqlModel } from './models/aluno.model';
 import { AlunoInput } from './models/aluno.input';
 
 @Resolver(of => AlunoGraphqlModel)
 export class alunoResolver {
     constructor(
-        private alunoService: alunoService,
+        private readonly alunoService: alunoService,
     ) {}
 
     @Query(returns => [AlunoGraphqlModel])
